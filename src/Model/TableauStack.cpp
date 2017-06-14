@@ -40,8 +40,8 @@ bool TableauStack::is_suitable(const Card *card) const {
         return card->get_rank() == (ascending ? Card::eRank::Ace : Card::eRank::King);
     }
     int inc = ascending ? 1 : -1;
-    return static_cast<int>(top->get_rank()) == static_cast<int>(card->get_rank()) + inc
-           && alternate_suits ^ (top->is_black() != card->is_black());
+    return (static_cast<int>(card->get_rank()) == static_cast<int>(top->get_rank()) + inc)
+           && (alternate_suits ^ (top->is_black() == card->is_black()));
 }
 
 bool TableauStack::is_suitable(const std::vector<const Card *> &stack) {
@@ -57,7 +57,7 @@ bool TableauStack::is_suitable(const std::vector<const Card *> &stack) {
         bool cur_is_black = i->is_black();
         int cur_rank = static_cast<int>(i->get_rank());
         // FIXME: one func(prev, next)
-        if (alternate_suits ^ (last_is_black == cur_is_black) || last_rank != cur_rank + inc) {
+        if ((alternate_suits ^ (last_is_black != cur_is_black)) || cur_rank != last_rank + inc) {
             return false;
         } else {
             last_is_black = cur_is_black;
