@@ -2,11 +2,10 @@
 // Created by moonlightnvkz on 26.05.17.
 //
 #include <QPainter>
-#include <QDebug>
 #include <QCursor>
 #include <QGraphicsSceneMouseEvent>
-#include <include/View/CardTextureAtlas.h>
 #include <QtWidgets/QApplication>
+#include "include/View/CardTextureAtlas.h"
 #include "include/View/CardView.h"
 
 CardView::CardView(const Card *card, QGraphicsItem *parent)
@@ -21,12 +20,9 @@ CardView::~CardView() {
 
 }
 
-
-void CardView::update(const Card *card) {
-
-}
-
 void CardView::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
     painter->drawPixmap(0, 0, pmap);
 }
 
@@ -35,6 +31,7 @@ QRectF CardView::boundingRect() const {
 }
 
 void CardView::mousePressEvent(QGraphicsSceneMouseEvent *event) {
+    Q_UNUSED(event);
     setCursor(Qt::ClosedHandCursor);
     emit mouse_pressed();
 }
@@ -50,5 +47,6 @@ void CardView::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
 }
 
 void CardView::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
+    Q_UNUSED(event);
     setCursor(Qt::OpenHandCursor);
 }

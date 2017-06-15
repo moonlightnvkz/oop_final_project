@@ -33,9 +33,9 @@ signals:
     void drag_release_back();
 
 public slots:
-    void card_mouse_pressed();
+    void on_card_mouse_pressed();
 
-    void card_drag_happen();
+    void on_card_drag_happen();
 
 protected:
     virtual void dragEnterEvent(QGraphicsSceneDragDropEvent *event) override;

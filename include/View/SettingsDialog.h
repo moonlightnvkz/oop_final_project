@@ -23,7 +23,7 @@ public:
     virtual ~AppearanceTab() override;
 
 public slots:
-    void choose_color();
+    void on_choose_color();
 
 protected:
     void load();
@@ -78,9 +78,9 @@ public:
     bool game_rules_changed() const { return game_rules_tab->changed(); }
 
 public slots:
-    void write_settings();
+    void on_accepted();
 
-    void load_default(QAbstractButton* btn);
+    void on_restore_defaults(QAbstractButton *btn);
 
 protected:
     QTabWidget *tab_widget;

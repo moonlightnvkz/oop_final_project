@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <functional>
 #include <include/View/TableauStackView.h>
+#include <cassert>
 #include "include/View/StackLayoutView.h"
 
 template<typename T>
@@ -31,8 +32,8 @@ StackLayoutView<T>::~StackLayoutView() {
 template<typename T>
 void StackLayoutView<T>::load_stacks(const std::vector<std::reference_wrapper<const CardContainer>> &stacks) {
     for (auto s : this->stacks) {
-        disconnect(s, SIGNAL(card_dropped()), this, SLOT(receive_card_dropped()));
-        disconnect(s, SIGNAL(drag_happen(size_t)), this, SLOT(receive_drag_happen(size_t)));
+        disconnect(s, SIGNAL(card_dropped()), this, SLOT(on_card_dropped()));
+        disconnect(s, SIGNAL(drag_happen(size_t)), this, SLOT(on_drag_happen(size_t)));
         disconnect(s, SIGNAL(drag_release_back()), this, SLOT(on_drag_release_back()));
         s->deleteLater();
     }
@@ -40,8 +41,8 @@ void StackLayoutView<T>::load_stacks(const std::vector<std::reference_wrapper<co
     for (const auto s : stacks) {
         T *p = new T(s, this);
         this->stacks.push_back(p);
-        connect(p, SIGNAL(card_dropped()), this, SLOT(receive_card_dropped()));
-        connect(p, SIGNAL(drag_happen(size_t)), this, SLOT(receive_drag_happen(size_t)));
+        connect(p, SIGNAL(card_dropped()), this, SLOT(on_card_dropped()));
+        connect(p, SIGNAL(drag_happen(size_t)), this, SLOT(on_drag_happen(size_t)));
         connect(p, SIGNAL(drag_release_back()), this, SLOT(on_drag_release_back()));
     }
     adjust_h_space(h_space);
@@ -63,14 +64,14 @@ QRectF StackLayoutView<T>::boundingRect() const {
 }
 
 template<typename T>
-void StackLayoutView<T>::receive_card_dropped() {
+void StackLayoutView<T>::on_card_dropped() {
     qDebug() << "StackLayoutView<T>::receive_card_dropped";
     QObject *sender = QObject::sender();
     emit card_dropped(get_stack_idx(sender));
 }
 
 template<typename T>
-void StackLayoutView<T>::receive_drag_happen(size_t amount) {
+void StackLayoutView<T>::on_drag_happen(size_t amount) {
     qDebug() << "StackLayoutView<T>::receive_drag_happen";
     QObject *sender = QObject::sender();
     emit tale_taken(get_stack_idx(sender), amount);
@@ -85,7 +86,8 @@ unsigned StackLayoutView<T>::get_stack_idx(void *p) {
         }
     }
     // Should never happen
-    return static_cast<unsigned>(size) + 1; // FIXME: when there is no such stack
+    assert(true);
+    return 0;
 }
 
 template<typename T>

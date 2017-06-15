@@ -56,7 +56,6 @@ bool TableauStack::is_suitable(const std::vector<const Card *> &stack) {
     for (const auto i : stack) {
         bool cur_is_black = i->is_black();
         int cur_rank = static_cast<int>(i->get_rank());
-        // FIXME: one func(prev, next)
         if ((alternate_suits ^ (last_is_black != cur_is_black)) || cur_rank != last_rank + inc) {
             return false;
         } else {

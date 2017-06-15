@@ -2,9 +2,9 @@
 // Created by moonlightnvkz on 30.05.17.
 //
 
-#include <include/Model/CardDeck.h>
-#include <include/View/TextureManager.h>
 #include <cassert>
+#include "include/View/TextureManager.h"
+#include "include/Model/CardDeck.h"
 #include "include/View/CardTextureAtlas.h"
 
 CardTextureAtlas::CardTextureAtlas()
@@ -97,7 +97,6 @@ std::string CardTextureAtlas::get_face_texture_name(Card::eSuit suit, Card::eRan
 
 void CardTextureAtlas::load_textures() {
     TextureManager &manager = TextureManager::GetInstance();
-    // 52 - amount -- cut off cards with small ranks
     for (unsigned i = 0; i < CardDeck::Amount; ++i) {
         ids.push_back(manager.load(get_face_texture_name(static_cast<Card::eSuit>(i / CardDeck::CPS),
                                                          static_cast<Card::eRank>(i % CardDeck::CPS))));

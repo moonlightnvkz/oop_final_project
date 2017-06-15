@@ -20,8 +20,6 @@ public:
 
     virtual ~CardView() override;
 
-    void update(const Card *card);
-
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
     const QPixmap &get_pixmap() const { return pmap; }

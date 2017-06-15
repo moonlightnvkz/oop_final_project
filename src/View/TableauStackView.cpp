@@ -2,10 +2,9 @@
 // Created by moonlightnvkz on 29.05.17.
 //
 
-#include <QDebug>
-#include <include/View/TextureManager.h>
 #include <QtGui/QPainter>
 #include <cassert>
+#include "include/View/TextureManager.h"
 #include "include/View/TableauStackView.h"
 #include "include/Model/TableauStack.h"
 #include "include/View/CardView.h"

@@ -11,7 +11,6 @@ class TableauStack;
 class TableauStackView : public CardContainerView {
     Q_OBJECT
 public:
-    // FIXME: move v_shift to settings class
     explicit TableauStackView(const CardContainer &container,
                               QGraphicsItem *parent = nullptr, int v_shift = 15);
 

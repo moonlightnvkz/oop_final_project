@@ -21,9 +21,9 @@ signals:
 
     void drag_release_back();
 public slots:
-    virtual void receive_card_dropped() = 0;
+    virtual void on_card_dropped() = 0;
 
-    virtual void receive_drag_happen(size_t amount) = 0;
+    virtual void on_drag_happen(size_t amount) = 0;
 
     virtual void on_drag_release_back() = 0;
 
@@ -47,11 +47,11 @@ public:
     virtual QRectF boundingRect() const override;
 
     // Slots
-    virtual void receive_card_dropped() override;
+    virtual void on_card_dropped() override;
 
     virtual void adjust_h_space(int new_h_space) override;
 
-    virtual void receive_drag_happen(size_t amount) override;
+    virtual void on_drag_happen(size_t amount) override;
 
     virtual void on_drag_release_back() override;
 

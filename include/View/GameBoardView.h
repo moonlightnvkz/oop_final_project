@@ -36,20 +36,20 @@ public:
     CardContainerView *waste;
 public slots:
 
-    void deck_pressed();
+    void on_deck_pressed();
 
-    void card_taken_from_waste(size_t);
+    void on_card_taken_from_waste(size_t);
 
     /// size_t is for compatibility
-    void card_from_foundation_is_taken(unsigned i, size_t);
+    void on_card_from_foundation_is_taken(unsigned i, size_t);
 
-    void tableau_stack_tale_is_taken(unsigned i, size_t idx_from_back);
+    void on_tableau_stack_tale_is_taken(unsigned i, size_t idx_from_back);
 
-    void card_dropped_to_tableau(unsigned i);
+    void on_card_dropped_to_tableau(unsigned i);
 
-    void card_dropped_to_foundation(unsigned i);
+    void on_card_dropped_to_foundation(unsigned i);
 
-    void release_back();
+    void on_release_back();
 
     void apply_settings();
 

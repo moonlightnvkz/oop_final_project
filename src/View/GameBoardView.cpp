@@ -2,7 +2,6 @@
 // Created by moonlightnvkz on 29.05.17.
 //
 
-#include <QDebug>
 #include <QDrag>
 #include <QMimeData>
 #include <QtWidgets/QMessageBox>
@@ -12,10 +11,10 @@
 #include "include/Settings.h"
 #include "include/Controller/Controller.h"
 #include "include/View/CardView.h"
-#include "include/View/GameBoardView.h"
 #include "include/View/StackLayoutView.h"
-#include "include/View/TableauStackView.h"
 #include "include/View/CardContainerView.h"
+#include "include/View/GameBoardView.h"
+#include "include/View/TableauStackView.h"
 
 GameBoardView::GameBoardView(QWidget *parent)
         : QGraphicsView(parent) {
@@ -32,15 +31,16 @@ GameBoardView::GameBoardView(QWidget *parent)
     tableau = new StackLayoutView<TableauStackView>();
     tableau->setPos(10, 200);
 
-    connect(deck, SIGNAL(mouse_pressed()), this, SLOT(deck_pressed()));
-    connect(waste, SIGNAL(drag_happen(size_t)), this, SLOT(card_taken_from_waste(size_t)));
-    connect(foundation, SIGNAL(tale_taken(unsigned, size_t)), this, SLOT(card_from_foundation_is_taken(unsigned, size_t)));
-    connect(tableau, SIGNAL(tale_taken(unsigned, size_t)), this, SLOT(tableau_stack_tale_is_taken(unsigned, size_t)));
-    connect(foundation, SIGNAL(card_dropped(unsigned)), this, SLOT(card_dropped_to_foundation(unsigned)));
-    connect(tableau, SIGNAL(card_dropped(unsigned)), this, SLOT(card_dropped_to_tableau(unsigned)));
-    connect(waste, SIGNAL(drag_release_back()), this, SLOT(release_back()));
-    connect(tableau, SIGNAL(drag_release_back()), this, SLOT(release_back()));
-    connect(foundation, SIGNAL(drag_release_back()), this, SLOT(release_back()));
+    connect(deck, SIGNAL(mouse_pressed()), this, SLOT(on_deck_pressed()));
+    connect(waste, SIGNAL(drag_happen(size_t)), this, SLOT(on_card_taken_from_waste(size_t)));
+    connect(foundation, SIGNAL(tale_taken(unsigned, size_t)), this, SLOT(
+            on_card_from_foundation_is_taken(unsigned, size_t)));
+    connect(tableau, SIGNAL(tale_taken(unsigned, size_t)), this, SLOT(on_tableau_stack_tale_is_taken(unsigned, size_t)));
+    connect(foundation, SIGNAL(card_dropped(unsigned)), this, SLOT(on_card_dropped_to_foundation(unsigned)));
+    connect(tableau, SIGNAL(card_dropped(unsigned)), this, SLOT(on_card_dropped_to_tableau(unsigned)));
+    connect(waste, SIGNAL(drag_release_back()), this, SLOT(on_release_back()));
+    connect(tableau, SIGNAL(drag_release_back()), this, SLOT(on_release_back()));
+    connect(foundation, SIGNAL(drag_release_back()), this, SLOT(on_release_back()));
 
     scene()->addItem(deck);
     scene()->addItem(waste);
@@ -54,43 +54,31 @@ GameBoardView::~GameBoardView() {
 
 }
 
-//void GameBoardView::drawBackground(QPainter *painter, const QRectF &rect) {
-//    const QPixmap &pmap = TextureManager::GetInstance().get_by_id(background);
-//    painter->drawPixmap(this->rect(), pmap, pmap.rect());
-//}
-
-void GameBoardView::deck_pressed() {
-    qDebug() << "GameBoardView::deck_pressed";
+void GameBoardView::on_deck_pressed() {
     controller->turn_deck();
 }
 
-void GameBoardView::card_taken_from_waste(size_t) {
-    qDebug() << "GameBoardView::card_taken_from_waste";
+void GameBoardView::on_card_taken_from_waste(size_t) {
     controller->card_from_waste_is_taken();
 }
 
-void GameBoardView::card_from_foundation_is_taken(unsigned i, size_t) {
-    qDebug() << "GameBoardView::card_from_foundation_is_taken";
+void GameBoardView::on_card_from_foundation_is_taken(unsigned i, size_t) {
     controller->card_from_foundation_is_taken(i);
 }
 
-void GameBoardView::card_dropped_to_tableau(unsigned i) {
-    qDebug() << "GameBoardView::card_dropped_to_tableau";
+void GameBoardView::on_card_dropped_to_tableau(unsigned i) {
     controller->put_to_tableau_stack(i);
 }
 
-void GameBoardView::card_dropped_to_foundation(unsigned i) {
-    qDebug() << "GameBoardView::card_dropped_to_foundation";
+void GameBoardView::on_card_dropped_to_foundation(unsigned i) {
     controller->put_to_foundation_stack(i);
 }
 
-void GameBoardView::tableau_stack_tale_is_taken(unsigned i, size_t amount) {
-    qDebug() << "GameBoardView::tableau_stack_tale_is_taken";
+void GameBoardView::on_tableau_stack_tale_is_taken(unsigned i, size_t amount) {
     controller->tableau_stack_tale_is_taken(i, amount);
 }
 
-void GameBoardView::release_back() {
-    qDebug() << "GameBoardView::release_back";
+void GameBoardView::on_release_back() {
     controller->release_back();
 }
 

@@ -4,8 +4,8 @@
 
 #include <stdexcept>
 #include <algorithm>
-#include <include/Settings.h>
 #include <cassert>
+#include "include/Settings.h"
 #include "include/Model/CardDeck.h"
 #include "include/Model/Waste.h"
 

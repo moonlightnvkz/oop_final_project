@@ -3,13 +3,12 @@
 //
 
 #include <QPainter>
-#include <QDebug>
 #include <QCursor>
 #include <QGraphicsSceneMouseEvent>
-#include <include/View/TextureManager.h>
 #include <QDrag>
 #include <QMimeData>
 #include <cassert>
+#include "include/View/TextureManager.h"
 #include "include/View/CardContainerView.h"
 #include "include/View/CardView.h"
 #include "include/Model/CardContainer.h"
@@ -43,8 +42,8 @@ CardContainerView::~CardContainerView() {
 
 void CardContainerView::update(const CardContainer &container) {
     for (auto c : cards) {
-        disconnect(c, SIGNAL(mouse_pressed()), this, SLOT(card_mouse_pressed()));
-        disconnect(c, SIGNAL(drag_happen()), this, SLOT(card_drag_happen()));
+        disconnect(c, SIGNAL(mouse_pressed()), this, SLOT(on_card_mouse_pressed()));
+        disconnect(c, SIGNAL(drag_happen()), this, SLOT(on_card_drag_happen()));
         c->deleteLater();
     }
     cards.clear();
@@ -52,8 +51,8 @@ void CardContainerView::update(const CardContainer &container) {
     if (size > 0) {
         for (size_t i = size - 1;; --i) {
             CardView *c = new CardView(container.peek_card(i), this);
-            connect(c, SIGNAL(mouse_pressed()), this, SLOT(card_mouse_pressed()));
-            connect(c, SIGNAL(drag_happen()), this, SLOT(card_drag_happen()));
+            connect(c, SIGNAL(mouse_pressed()), this, SLOT(on_card_mouse_pressed()));
+            connect(c, SIGNAL(drag_happen()), this, SLOT(on_card_drag_happen()));
             cards.push_back(c);
             if (i == 0) {
                 break;
@@ -63,6 +62,8 @@ void CardContainerView::update(const CardContainer &container) {
 }
 
 void CardContainerView::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
     painter->drawPixmap(0, 0, TextureManager::GetInstance().get_by_id(background));
 }
 
@@ -83,13 +84,11 @@ void CardContainerView::dropEvent(QGraphicsSceneDragDropEvent *event) {
     emit card_dropped();
 }
 
-void CardContainerView::card_mouse_pressed() {
-    qDebug() << "CardContainerView::card_mouse_pressed";
+void CardContainerView::on_card_mouse_pressed() {
     emit mouse_pressed();
 }
 
 void CardContainerView::mousePressEvent(QGraphicsSceneMouseEvent *event) {
-    qDebug() << "CardContainerView::mousePressEvent";
     Q_UNUSED(event);
     emit mouse_pressed();
 }
@@ -104,8 +103,7 @@ QObject *CardContainerView::drag_processing(const QPixmap &pmap, QRectF bounding
     return drag->target();
 }
 
-void CardContainerView::card_drag_happen() {
-    qDebug() << "CardContainerView::card_drag_happen";
+void CardContainerView::on_card_drag_happen() {
     const CardView *sender = dynamic_cast<CardView *>(QObject::sender());
     if (!sender || sender->get_side() == Card::eSide::Back) {
         return;
@@ -134,6 +132,7 @@ void CardContainerView::card_drag_happen() {
 }
 
 QPixmap CardContainerView::create_pixmap_for_drag(size_t amount) {
+    Q_UNUSED(amount);
     assert(cards.size() > 0);
     return cards.back()->get_pixmap();
 }

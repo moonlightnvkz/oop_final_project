@@ -11,8 +11,8 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QCheckBox>
-#include <include/Settings.h>
 #include <QtWidgets/QColorDialog>
+#include "include/Settings.h"
 #include "include/View/SettingsDialog.h"
 
 SettingsDialog::SettingsDialog(QWidget *parent)
@@ -28,8 +28,8 @@ SettingsDialog::SettingsDialog(QWidget *parent)
                                       | QDialogButtonBox::RestoreDefaults, this);
     connect(button_box, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(button_box, &QDialogButtonBox::rejected, this, &QDialog::reject);
-    connect(button_box, &QDialogButtonBox::clicked, this, &SettingsDialog::load_default);
-    connect(this, &QDialog::accepted, this, &SettingsDialog::write_settings);
+    connect(button_box, &QDialogButtonBox::clicked, this, &SettingsDialog::on_restore_defaults);
+    connect(this, &QDialog::accepted, this, &SettingsDialog::on_accepted);
 
     QVBoxLayout *main_layout = new QVBoxLayout(this);
     main_layout->addWidget(tab_widget);
@@ -43,7 +43,7 @@ SettingsDialog::~SettingsDialog() {
 
 }
 
-void SettingsDialog::write_settings() {
+void SettingsDialog::on_accepted() {
     Settings &settings = Settings::GetInstance();
     QString str;
     settings.game_rules.alternate_suits_in_the_tableau =
@@ -66,7 +66,7 @@ void SettingsDialog::write_settings() {
     settings.appearance.background_color = {color.red(), color.green(), color.blue()};
 }
 
-void SettingsDialog::load_default(QAbstractButton *btn) {
+void SettingsDialog::on_restore_defaults(QAbstractButton *btn) {
     if (btn != static_cast<QAbstractButton*>(button_box->button(QDialogButtonBox::RestoreDefaults))) {
         return;
     }
@@ -93,7 +93,7 @@ AppearanceTab::AppearanceTab(QWidget *parent)
     color_button = new QPushButton(this);
     color_button->setAutoFillBackground(true);
     color_button->setFixedSize(25, 25);
-    connect(color_button, &QPushButton::clicked, this, &AppearanceTab::choose_color);
+    connect(color_button, &QPushButton::clicked, this, &AppearanceTab::on_choose_color);
 
     load();
 
@@ -125,7 +125,7 @@ void AppearanceTab::load() {
     color_button->setPalette(palette);
 }
 
-void AppearanceTab::choose_color() {
+void AppearanceTab::on_choose_color() {
     QColor color;
     color = QColorDialog::getColor(color_button->palette().color(QPalette::Button), this, "Select Color");
 
