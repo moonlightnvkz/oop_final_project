@@ -24,7 +24,7 @@ public slots:
     void adjust_v_shift(int new_v_shift);
 
 protected:
-    virtual QPixmap create_pixmap_for_drag(size_t amount) override;
+    virtual QPixmap create_pixmap_for_drag(size_t amount) const override;
 
     int v_shift;
 };

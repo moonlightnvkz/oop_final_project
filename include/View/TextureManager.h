@@ -21,7 +21,7 @@ public:
 
     unsigned load(const std::string filename);
 
-    const QPixmap &get_by_id(unsigned id);
+    const QPixmap &get_by_id(unsigned id) const;
 
 private:
     TextureManager();

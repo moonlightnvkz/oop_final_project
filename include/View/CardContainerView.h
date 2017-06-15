@@ -48,7 +48,7 @@ protected:
 
     QObject *drag_processing(const QPixmap &pmap, QRectF boundingRect);
 
-    virtual QPixmap create_pixmap_for_drag(size_t amount);
+    virtual QPixmap create_pixmap_for_drag(size_t amount) const;
 
     std::vector<CardView *> cards;
 

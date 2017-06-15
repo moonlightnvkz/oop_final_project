@@ -19,7 +19,9 @@ set(SOURCE_FILES
         src/Model/TableauStack.cpp include/Model/TableauStack.h
         src/Model/CardContainer.cpp src/Model/Tableau.cpp
         src/Controller/Controller.cpp include/Controller/Controller.h
-        src/Model/GameBoard.cpp include/Model/GameBoard.h src/Settings.cpp include/Settings.h src/SettingsReader.cpp include/SettingsReader.h)
+        src/Model/GameBoard.cpp include/Model/GameBoard.h
+        src/Settings.cpp include/Settings.h src/SettingsReader.cpp
+        include/SettingsReader.h)
 
 set (GUI_SOURCES
         src/View/MainWindow.cpp include/View/MainWindow.h
@@ -29,7 +31,9 @@ set (GUI_SOURCES
         src/View/CardContainerView.cpp include/View/CardContainerView.h
         src/View/TableauStackView.cpp include/View/TableauStackView.h
         src/View/StackLayoutView.cpp include/View/StackLayoutView.h
-        src/View/CardTextureAtlas.cpp include/View/CardTextureAtlas.h src/View/SettingsDialog.cpp include/View/SettingsDialog.h src/SettingsWriter.cpp include/SettingsWriter.h)
+        src/View/CardTextureAtlas.cpp include/View/CardTextureAtlas.h
+        src/View/SettingsDialog.cpp include/View/SettingsDialog.h
+        src/SettingsWriter.cpp include/SettingsWriter.h)
 
 add_executable(SolitaireKlondike_exe main.cpp)
 add_library(SolitaireKlondike_lib SHARED ${SOURCE_FILES} ${GUI_SOURCES})
@@ -40,3 +44,13 @@ set(CMAKE_PREFIX_PATH $ENV{HOME}/Qt/5.7/gcc_64)
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
+
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+set(TEST_FILES test/ModelTest.cpp)
+
+add_executable(RunAllTests ${TEST_FILES})
+
+target_link_libraries(RunAllTests gtest gtest_main)
+target_link_libraries(RunAllTests SolitaireKlondike_lib)
+
+#add_subdirectory(test)

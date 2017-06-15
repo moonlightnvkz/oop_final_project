@@ -18,12 +18,12 @@ public:
 
     void load_textures();
 
-    const QPixmap &get_texture(Card::eSuit suit, Card::eSide side, Card::eRank rank);
+    const QPixmap &get_texture(eSuit suit, eSide side, eRank rank) const;
 
 private:
     CardTextureAtlas();
 
-    std::string get_face_texture_name(Card::eSuit suit, Card::eRank rank) const;
+    std::string get_face_texture_name(eSuit suit, eRank rank) const;
 
     std::vector<unsigned> ids;
 

@@ -23,10 +23,9 @@ QRectF TableauStackView::boundingRect() const {
     if (cards.size() == 0) {
         return bg.rect();
     }
-    const CardView *back = cards.back();
-    QRectF rect = back->boundingRect();
-    QPointF pos = back->pos();
-    return QRectF(0, 0, bg.width(), pos.y() + rect.height());
+    QRectF rect = cards.back()->boundingRect();
+    // maximum number of cards in a stack - 23
+    return QRectF(0, 0, bg.width(), 15 * v_shift + rect.height());
 }
 
 void TableauStackView::update(const CardContainer &container) {
@@ -38,7 +37,7 @@ void TableauStackView::update(const CardContainer &container) {
     }
 }
 
-QPixmap TableauStackView::create_pixmap_for_drag(size_t amount) {
+QPixmap TableauStackView::create_pixmap_for_drag(size_t amount) const {
     assert(cards.size() > 0);
     size_t size = cards.size();
     QRect first_r = cards[size - amount]->boundingRect().toRect();

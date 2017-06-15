@@ -17,76 +17,76 @@ CardTextureAtlas &CardTextureAtlas::GetInstance() {
     return atlas;
 }
 
-std::string CardTextureAtlas::get_face_texture_name(Card::eSuit suit, Card::eRank rank) const {
+std::string CardTextureAtlas::get_face_texture_name(eSuit suit, eRank rank) const {
     std::string name = "res/";
     switch(suit) {
-        case Card::eSuit::Hearts: {
+        case eSuit::Hearts: {
             name += "heart";
             break;
         }
-        case Card::eSuit::Clubs: {
+        case eSuit::Clubs: {
             name += "club";
             break;
         }
-        case Card::eSuit::Diamonds: {
+        case eSuit::Diamonds: {
             name += "diamond";
             break;
         }
-        case Card::eSuit::Spades: {
+        case eSuit::Spades: {
             name += "spade";
             break;
         }
     }
     switch(rank) {
-        case Card::eRank::Ace: {
+        case eRank::Ace: {
             name += "Ace";
             break;
         }
-        case Card::eRank::Two: {
+        case eRank::Two: {
             name += "2";
             break;
         }
-        case Card::eRank::Three: {
+        case eRank::Three: {
             name += "3";
             break;
         }
-        case Card::eRank::Four: {
+        case eRank::Four: {
             name += "4";
             break;
         }
-        case Card::eRank::Five: {
+        case eRank::Five: {
             name += "5";
             break;
         }
-        case Card::eRank::Six: {
+        case eRank::Six: {
             name += "6";
             break;
         }
-        case Card::eRank::Seven: {
+        case eRank::Seven: {
             name += "7";
             break;
         }
-        case Card::eRank::Eight: {
+        case eRank::Eight: {
             name += "8";
             break;
         }
-        case Card::eRank::Nine: {
+        case eRank::Nine: {
             name += "9";
             break;
         }
-        case Card::eRank::Ten: {
+        case eRank::Ten: {
             name += "10";
             break;
         }
-        case Card::eRank::Jack: {
+        case eRank::Jack: {
             name += "Jack";
             break;
         }
-        case Card::eRank::Queen: {
+        case eRank::Queen: {
             name += "Queen";
             break;
         }
-        case Card::eRank::King: {
+        case eRank::King: {
             name += "King";
             break;
         }
@@ -98,17 +98,17 @@ std::string CardTextureAtlas::get_face_texture_name(Card::eSuit suit, Card::eRan
 void CardTextureAtlas::load_textures() {
     TextureManager &manager = TextureManager::GetInstance();
     for (unsigned i = 0; i < CardDeck::Amount; ++i) {
-        ids.push_back(manager.load(get_face_texture_name(static_cast<Card::eSuit>(i / CardDeck::CPS),
-                                                         static_cast<Card::eRank>(i % CardDeck::CPS))));
+        ids.push_back(manager.load(get_face_texture_name(static_cast<eSuit>(i / CardDeck::CPS),
+                                                         static_cast<eRank>(i % CardDeck::CPS))));
     }
     ids.push_back(manager.load("res/blueBack.png"));
     textures_loaded = true;
 }
 
-const QPixmap &CardTextureAtlas::get_texture(Card::eSuit suit, Card::eSide side, Card::eRank rank) {
+const QPixmap &CardTextureAtlas::get_texture(eSuit suit, eSide side, eRank rank) const {
     assert(textures_loaded);
     TextureManager &manager = TextureManager::GetInstance();
-    if (side == Card::eSide::Back) {
+    if (side == eSide::Back) {
         return manager.get_by_id(ids.back());
     } else {
         return manager.get_by_id(ids.at(

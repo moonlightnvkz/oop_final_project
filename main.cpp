@@ -1,6 +1,6 @@
 #include <QtWidgets/QApplication>
 #include <fstream>
-#include <include/View/CardTextureAtlas.h>
+#include "include/View/CardTextureAtlas.h"
 #include "include/Model/GameBoard.h"
 #include "include/SettingsReader.h"
 #include "include/Settings.h"
@@ -8,9 +8,6 @@
 #include "include/Controller/Controller.h"
 #include "include/View/GameBoardView.h"
 
-// TODO: create settings class
-// TODO: random shuffle
-// FIXME: delete unused ContainerSubstrate
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);

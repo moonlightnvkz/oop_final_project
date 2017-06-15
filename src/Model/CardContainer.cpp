@@ -10,7 +10,7 @@ bool CardContainer::push_back(std::unique_ptr<Card> &&card) {
         return true;
     }
     if (is_suitable(card.get())) {
-        card->set_side(Card::eSide::Face);
+        card->set_side(eSide::Face);
         cards.push_back(std::move(card));
         return true;
     }
@@ -53,6 +53,6 @@ CardContainer &CardContainer::operator=(CardContainer &&that) {
 CardContainer::CardContainer(std::vector<std::unique_ptr<Card>> &&cards)
         : cards(std::move(cards)) {
     if (this->cards.size() > 0) {
-        this->cards.back()->set_side(Card::eSide::Face);
+        this->cards.back()->set_side(eSide::Face);
     }
 }

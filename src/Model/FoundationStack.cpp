@@ -22,7 +22,7 @@ bool FoundationStack::is_suitable(const Card *card) const {
     const Card *top = peek_card();
     bool ascending = order == RankOrder::Ascending;
     if (top == nullptr) {
-        return card->get_rank() == (ascending ? Card::eRank::Ace : Card::eRank::King);
+        return card->get_rank() == (ascending ? eRank::Ace : eRank::King);
     }
     int inc = ascending ? 1 : -1;
     return static_cast<int>(top->get_rank()) == static_cast<int>(card->get_rank()) - inc

@@ -4,10 +4,9 @@
 
 #include <QtGui/QPainter>
 #include <QtWidgets/QStyleOptionGraphicsItem>
-#include <QDebug>
 #include <functional>
-#include <include/View/TableauStackView.h>
 #include <cassert>
+#include "include/View/TableauStackView.h"
 #include "include/View/StackLayoutView.h"
 
 template<typename T>
@@ -65,14 +64,12 @@ QRectF StackLayoutView<T>::boundingRect() const {
 
 template<typename T>
 void StackLayoutView<T>::on_card_dropped() {
-    qDebug() << "StackLayoutView<T>::receive_card_dropped";
     QObject *sender = QObject::sender();
     emit card_dropped(get_stack_idx(sender));
 }
 
 template<typename T>
 void StackLayoutView<T>::on_drag_happen(size_t amount) {
-    qDebug() << "StackLayoutView<T>::receive_drag_happen";
     QObject *sender = QObject::sender();
     emit tale_taken(get_stack_idx(sender), amount);
 }

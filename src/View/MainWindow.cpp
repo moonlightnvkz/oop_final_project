@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     controller(nullptr)
 {
     ui->setupUi(this);
-    setFixedSize(720, 480);
+    setFixedSize(640, 640);
     connect(ui->actionSettings, SIGNAL(triggered()), this, SLOT(show_settings()));
     connect(this, SIGNAL(settings_changed()), ui->graphicsView, SLOT(apply_settings()));
     connect(ui->actionRestart, SIGNAL(triggered()), this, SLOT(on_restart()));

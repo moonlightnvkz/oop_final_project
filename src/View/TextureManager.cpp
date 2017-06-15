@@ -25,7 +25,7 @@ unsigned TextureManager::load(const std::string filename) {
     return static_cast<unsigned>(pixmaps.size() - 1);
 }
 
-const QPixmap &TextureManager::get_by_id(unsigned id) {
+const QPixmap &TextureManager::get_by_id(unsigned id) const {
     assert(id < pixmaps.size());
     return pixmaps[id];
 }

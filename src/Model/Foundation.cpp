@@ -7,7 +7,7 @@
 bool Foundation::is_complete() const {
     for(const auto &stack : stacks) {
         const Card *card = stack.peek_card();
-        if (card == nullptr || card->get_rank() != Card::eRank::King) {
+        if (card == nullptr || card->get_rank() != eRank::King) {
             return false;
         }
     }

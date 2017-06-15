@@ -4,36 +4,36 @@
 
 #pragma once
 
+enum class eSuit {
+    Hearts,
+    Clubs,
+    Diamonds,
+    Spades
+};
+
+enum class eRank {
+    Ace,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Jack,
+    Queen,
+    King
+};
+
+enum class eSide {
+    Back,
+    Face
+};
+
 class Card {
 public:
-    enum class eSuit {
-        Hearts,
-        Clubs,
-        Diamonds,
-        Spades
-    };
-
-    enum class eRank {
-        Ace,
-        Two,
-        Three,
-        Four,
-        Five,
-        Six,
-        Seven,
-        Eight,
-        Nine,
-        Ten,
-        Jack,
-        Queen,
-        King
-    };
-
-    enum class eSide {
-        Back,
-        Face
-    };
-
     Card(eSuit suit, eRank rank, eSide side = eSide::Back) : suit(suit), rank(rank), side(side){ }
 
     virtual ~Card() { }

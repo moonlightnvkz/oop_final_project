@@ -31,9 +31,9 @@ public:
 
     virtual bool is_suitable(const Card *card) const override;
 
-    virtual bool is_suitable(const std::vector<const Card *> &stack);
+    virtual bool is_suitable(const std::vector<const Card *> &stack) const;
 
-    virtual bool is_suitable(const TableauStack &stack);
+    virtual bool is_suitable(const TableauStack &stack) const;
 
     TableauStack &operator=(TableauStack &&that);
 

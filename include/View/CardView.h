@@ -24,7 +24,7 @@ public:
 
     const QPixmap &get_pixmap() const { return pmap; }
 
-    Card::eSide get_side() const { return side; }
+    eSide get_side() const { return side; }
 
 signals:
     void mouse_pressed();
@@ -40,5 +40,5 @@ protected:
 
     const QPixmap &pmap;
 
-    Card::eSide side;
+    eSide side;
 };

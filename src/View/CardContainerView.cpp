@@ -105,7 +105,7 @@ QObject *CardContainerView::drag_processing(const QPixmap &pmap, QRectF bounding
 
 void CardContainerView::on_card_drag_happen() {
     const CardView *sender = dynamic_cast<CardView *>(QObject::sender());
-    if (!sender || sender->get_side() == Card::eSide::Back) {
+    if (!sender || sender->get_side() == eSide::Back) {
         return;
     }
     size_t size = cards.size();
@@ -131,7 +131,7 @@ void CardContainerView::on_card_drag_happen() {
     }
 }
 
-QPixmap CardContainerView::create_pixmap_for_drag(size_t amount) {
+QPixmap CardContainerView::create_pixmap_for_drag(size_t amount) const {
     Q_UNUSED(amount);
     assert(cards.size() > 0);
     return cards.back()->get_pixmap();

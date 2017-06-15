@@ -37,18 +37,18 @@ bool TableauStack::is_suitable(const Card *card) const {
     }
     bool ascending = order == RankOrder::Ascending;
     if (top == nullptr) {
-        return card->get_rank() == (ascending ? Card::eRank::Ace : Card::eRank::King);
+        return card->get_rank() == (ascending ? eRank::Ace : eRank::King);
     }
     int inc = ascending ? 1 : -1;
     return (static_cast<int>(card->get_rank()) == static_cast<int>(top->get_rank()) + inc)
            && (alternate_suits ^ (top->is_black() == card->is_black()));
 }
 
-bool TableauStack::is_suitable(const std::vector<const Card *> &stack) {
+bool TableauStack::is_suitable(const std::vector<const Card *> &stack) const {
     bool ascending = order == RankOrder::Ascending;
     if (cards.size() == 0) {
         return stack.size() == 0 ||
-               stack[0]->get_rank() == (ascending ? Card::eRank::Ace : Card::eRank::King);
+               stack[0]->get_rank() == (ascending ? eRank::Ace : eRank::King);
     }
     bool last_is_black = cards.back().get()->is_black();
     int last_rank = static_cast<int>(cards.back().get()->get_rank());
@@ -75,14 +75,14 @@ void TableauStack::pop_tale(size_t amount) {
         cards.pop_back();
     }
     if (!cards.empty()) {
-        cards.back()->set_side(Card::eSide::Face);
+        cards.back()->set_side(eSide::Face);
     }
 }
 
 void TableauStack::pop_back() {
     CardContainer::pop_back();
     if (!cards.empty()) {
-        cards.back()->set_side(Card::eSide::Face);
+        cards.back()->set_side(eSide::Face);
     }
 }
 
@@ -120,6 +120,6 @@ const std::vector<const Card *> TableauStack::peek_tale(size_t amount) {
     return tale;
 }
 
-bool TableauStack::is_suitable(const TableauStack &stack) {
+bool TableauStack::is_suitable(const TableauStack &stack) const {
     return stack.cards.size() == 0 || is_suitable(stack.cards[0].get());
 }

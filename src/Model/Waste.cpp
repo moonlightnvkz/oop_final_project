@@ -19,6 +19,6 @@ bool Waste::push_back(std::unique_ptr<Card> &&card) {
     if (!CardContainer::push_back(std::move(card))) {
         return false;
     }
-    cards.back()->set_side(Card::eSide::Face);
+    cards.back()->set_side(eSide::Face);
     return true;
 }

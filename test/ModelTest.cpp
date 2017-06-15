@@ -97,7 +97,7 @@ TEST(TableauTest, StackAddTest) {
 }
 
 TEST(TableauTest, InitTest) {
-    std::array<TableauStack, 7> stacks;
+    std::vector<TableauStack> stacks;
     std::unique_ptr<Card> cards_exp_init[] = {
             std::make_unique<Card>(Card::eSuit::Hearts, Card::eRank::Nine),
             std::make_unique<Card>(Card::eSuit::Spades, Card::eRank::Nine),
@@ -118,7 +118,7 @@ TEST(TableauTest, InitTest) {
         std::vector<std::unique_ptr<Card>> cards{std::make_move_iterator(std::begin(cards_init)),
                                                  std::make_move_iterator(std::end(cards_init))};
         TableauStack stack(std::move(cards));
-        stacks.at(i) = std::move(stack);
+        stacks.push_back(std::move(stack));
     }
     Tableau tableau(std::move(stacks));
     for (unsigned i = 0; i < 7; ++i) {

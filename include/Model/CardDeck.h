@@ -21,7 +21,7 @@ public:
 
     virtual bool push_back(std::unique_ptr<Card> &&card) override;
 
-    void push_back(std::vector<std::unique_ptr<Card>> &&cards);
+    virtual void push_back(std::vector<std::unique_ptr<Card>> &&cards);
 
     static constexpr const unsigned Amount = 52;   // load all textures
 
