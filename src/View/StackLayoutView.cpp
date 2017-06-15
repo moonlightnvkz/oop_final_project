@@ -10,14 +10,14 @@
 #include "include/View/StackLayoutView.h"
 
 template<typename T>
-StackLayoutView<T>::StackLayoutView(int h_space, QGraphicsItem *parent)
+StackLayoutView<T>::StackLayoutView(const int h_space, QGraphicsItem *parent)
         : QGraphicsItemGroup(parent), h_space(h_space) {
     QGraphicsItemGroup::setHandlesChildEvents(false);
 }
 
 template<typename T>
 StackLayoutView<T>::StackLayoutView(const std::vector<std::reference_wrapper<const CardContainer>> &stacks,
-                                    int h_space, QGraphicsItem *parent)
+                                    const int h_space, QGraphicsItem *parent)
         : QGraphicsItemGroup(parent), h_space(h_space) {
     load_stacks(stacks);
     QGraphicsItemGroup::setHandlesChildEvents(false);
@@ -48,7 +48,7 @@ void StackLayoutView<T>::load_stacks(const std::vector<std::reference_wrapper<co
 }
 
 template<typename T>
-void StackLayoutView<T>::update(const CardContainer &stack, unsigned i) {
+void StackLayoutView<T>::update(const CardContainer &stack, const unsigned i) {
     stacks.at(i)->update(stack);
 }
 
@@ -69,13 +69,13 @@ void StackLayoutView<T>::on_card_dropped() {
 }
 
 template<typename T>
-void StackLayoutView<T>::on_drag_happen(size_t amount) {
+void StackLayoutView<T>::on_drag_happen(const size_t amount) {
     QObject *sender = QObject::sender();
     emit tale_taken(get_stack_idx(sender), amount);
 }
 
 template<typename T>
-unsigned StackLayoutView<T>::get_stack_idx(void *p) {
+unsigned StackLayoutView<T>::get_stack_idx(const void *p) {
     size_t size = stacks.size();
     for (unsigned i = 0; i < size; ++i) {
         if (stacks[i] == p) {

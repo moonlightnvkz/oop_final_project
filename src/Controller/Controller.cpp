@@ -33,18 +33,18 @@ void Controller::card_from_waste_is_taken() {
     origin = Origin::Waste;
 }
 
-void Controller::card_from_foundation_is_taken(unsigned i) {
+void Controller::card_from_foundation_is_taken(const unsigned i) {
     origin = Origin::Foundation;
     origin_descr.first = i;
 }
 
-void Controller::tableau_stack_tale_is_taken(unsigned i, size_t amount) {
+void Controller::tableau_stack_tale_is_taken(const unsigned i, const size_t amount) {
     origin = Origin::Tableau;
     origin_descr.first = i;
     origin_descr.second = amount;
 }
 
-bool Controller::put_to_tableau_stack(unsigned j) {
+bool Controller::put_to_tableau_stack(const unsigned j) {
     bool res = false;
     switch (origin) {
         case Origin::Waste: {
@@ -89,7 +89,7 @@ bool Controller::put_to_tableau_stack(unsigned j) {
     return res;
 }
 
-bool Controller::put_to_foundation_stack(unsigned j) {
+bool Controller::put_to_foundation_stack(const unsigned j) {
     bool res = false;
     switch (origin) {
         case Origin::Waste: {

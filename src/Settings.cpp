@@ -25,7 +25,7 @@ void Settings::load_default() {
     this->game_rules.foundation_rank_order = Settings::GameRules::RankOrder::Ascending;
 }
 
-std::ostream &operator<<(std::ostream &os, Settings::GameRules::RankOrder order) {
+std::ostream &operator<<(std::ostream &os, const Settings::GameRules::RankOrder order) {
     return os << static_cast<int>(order);
 }
 

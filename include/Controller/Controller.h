@@ -17,13 +17,13 @@ public:
 
     void card_from_waste_is_taken();
 
-    void card_from_foundation_is_taken(unsigned i);
+    void card_from_foundation_is_taken(const unsigned i);
 
-    void tableau_stack_tale_is_taken(unsigned i, size_t amount);
+    void tableau_stack_tale_is_taken(const unsigned i, const size_t amount);
 
-    bool put_to_tableau_stack(unsigned j);
+    bool put_to_tableau_stack(const unsigned j);
 
-    bool put_to_foundation_stack(unsigned j);
+    bool put_to_foundation_stack(const unsigned j);
 
     void release_back();
 

@@ -44,7 +44,7 @@ public:
 
     eSide get_side() const { return side; }
 
-    void set_side(eSide side) { this->side = side; }
+    void set_side(const eSide side) { this->side = side; }
 
     bool is_black() const { return suit == eSuit::Clubs || suit == eSuit::Spades; }
 

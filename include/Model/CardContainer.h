@@ -27,7 +27,7 @@ public:
 
     std::unique_ptr<Card> get_back();
 
-    const Card *peek_card(size_t idx_from_back = 0) const;
+    const Card *peek_card(const size_t idx_from_back = 0) const;
 
     size_t size() const { return cards.size(); }
 

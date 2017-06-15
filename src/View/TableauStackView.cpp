@@ -24,7 +24,7 @@ QRectF TableauStackView::boundingRect() const {
         return bg.rect();
     }
     QRectF rect = cards.back()->boundingRect();
-    // maximum number of cards in a stack - 23
+    // maximum number of cards in a stack - 23, so 15 should be enough
     return QRectF(0, 0, bg.width(), 15 * v_shift + rect.height());
 }
 

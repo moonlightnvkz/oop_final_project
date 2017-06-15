@@ -41,7 +41,7 @@ CardContainerView::~CardContainerView() {
 }
 
 void CardContainerView::update(const CardContainer &container) {
-    for (auto c : cards) {
+    for (auto &c : cards) {
         disconnect(c, SIGNAL(mouse_pressed()), this, SLOT(on_card_mouse_pressed()));
         disconnect(c, SIGNAL(drag_happen()), this, SLOT(on_card_drag_happen()));
         c->deleteLater();
@@ -93,7 +93,7 @@ void CardContainerView::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     emit mouse_pressed();
 }
 
-QObject *CardContainerView::drag_processing(const QPixmap &pmap, QRectF boundingRect) {
+QObject *CardContainerView::drag_processing(const QPixmap &pmap, const QRectF boundingRect) {
     QDrag *drag = new QDrag(this);
     QMimeData *mimeData = new QMimeData;
     drag->setMimeData(mimeData);

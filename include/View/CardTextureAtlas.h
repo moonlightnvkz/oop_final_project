@@ -16,14 +16,18 @@ public:
 
     CardTextureAtlas &operator=(const CardTextureAtlas &) = delete;
 
+    CardTextureAtlas(CardTextureAtlas &&) = delete;
+
+    CardTextureAtlas &operator=(CardTextureAtlas &&) = delete;
+
     void load_textures();
 
-    const QPixmap &get_texture(eSuit suit, eSide side, eRank rank) const;
+    const QPixmap &get_texture(const eSuit suit, const eSide side, const eRank rank) const;
 
 private:
     CardTextureAtlas();
 
-    std::string get_face_texture_name(eSuit suit, eRank rank) const;
+    std::string get_face_texture_name(const eSuit suit, const eRank rank) const;
 
     std::vector<unsigned> ids;
 

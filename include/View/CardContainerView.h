@@ -46,9 +46,9 @@ protected:
 
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 
-    QObject *drag_processing(const QPixmap &pmap, QRectF boundingRect);
+    QObject *drag_processing(const QPixmap &pmap, const QRectF boundingRect);
 
-    virtual QPixmap create_pixmap_for_drag(size_t amount) const;
+    virtual QPixmap create_pixmap_for_drag(const size_t amount) const;
 
     std::vector<CardView *> cards;
 

@@ -38,16 +38,16 @@ public slots:
 
     void on_deck_pressed();
 
-    void on_card_taken_from_waste(size_t);
+    void on_card_taken_from_waste(const size_t);
 
     /// size_t is for compatibility
-    void on_card_from_foundation_is_taken(unsigned i, size_t);
+    void on_card_from_foundation_is_taken(const unsigned i, const size_t);
 
-    void on_tableau_stack_tale_is_taken(unsigned i, size_t idx_from_back);
+    void on_tableau_stack_tale_is_taken(const unsigned i, const size_t idx_from_back);
 
-    void on_card_dropped_to_tableau(unsigned i);
+    void on_card_dropped_to_tableau(const unsigned i);
 
-    void on_card_dropped_to_foundation(unsigned i);
+    void on_card_dropped_to_foundation(const unsigned i);
 
     void on_release_back();
 

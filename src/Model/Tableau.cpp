@@ -11,6 +11,6 @@ Tableau &Tableau::operator=(Tableau &&that) {
     return *this;
 }
 
-Tableau::Tableau(unsigned stacks_amount)
+Tableau::Tableau(const unsigned stacks_amount)
         : stacks(stacks_amount) {
 }

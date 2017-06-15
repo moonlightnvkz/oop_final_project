@@ -10,8 +10,9 @@ TableauStack::TableauStack(std::vector<std::unique_ptr<Card>> &&cards, bool alte
 
 }
 
-TableauStack::TableauStack(TableauStack &&stack, bool alternate_suits)
-        : CardContainer(std::move(stack.cards)), alternate_suits(alternate_suits), order(stack.order) {
+TableauStack::TableauStack(TableauStack &&stack)
+        : CardContainer(std::move(stack.cards)),
+          alternate_suits(stack.alternate_suits), order(stack.order) {
 
 }
 
@@ -40,6 +41,8 @@ bool TableauStack::is_suitable(const Card *card) const {
         return card->get_rank() == (ascending ? eRank::Ace : eRank::King);
     }
     int inc = ascending ? 1 : -1;
+    bool b = (top->is_black() == card->is_black());
+    bool a = (alternate_suits ^ (top->is_black() == card->is_black()));
     return (static_cast<int>(card->get_rank()) == static_cast<int>(top->get_rank()) + inc)
            && (alternate_suits ^ (top->is_black() == card->is_black()));
 }

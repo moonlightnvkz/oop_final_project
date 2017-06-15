@@ -50,7 +50,7 @@ public:
     bool changed() const { return m_changed; }
 
 public slots:
-    void on_change(int);
+    void on_change(const int);
 
 protected:
     void load();

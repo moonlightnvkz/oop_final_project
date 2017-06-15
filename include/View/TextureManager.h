@@ -17,11 +17,15 @@ public:
 
     TextureManager &operator=(const TextureManager &) = delete;
 
+    TextureManager(TextureManager &&) = delete;
+
+    TextureManager &operator=(TextureManager &&) = delete;
+
     virtual ~TextureManager() {};
 
     unsigned load(const std::string filename);
 
-    const QPixmap &get_by_id(unsigned id) const;
+    const QPixmap &get_by_id(const unsigned id) const;
 
 private:
     TextureManager();

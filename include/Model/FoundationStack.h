@@ -12,9 +12,9 @@ using RankOrder = Settings::GameRules::RankOrder;
 
 class FoundationStack : public CardContainer{
 public:
-    FoundationStack (RankOrder order = RankOrder::Ascending);
+    FoundationStack(const RankOrder order = RankOrder::Ascending);
 
-    FoundationStack (FoundationStack  &&stack);
+    FoundationStack(FoundationStack  &&stack);
 
     FoundationStack &operator=(FoundationStack &&that);
 

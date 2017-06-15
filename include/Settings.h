@@ -14,7 +14,11 @@ public:
 
     Settings(const Settings &) = delete;
 
+    Settings(Settings &&) = delete;
+
     Settings &operator=(const Settings &) = delete;
+
+    Settings &operator=(Settings &&) = delete;
 
     void load_default();
 
@@ -51,6 +55,6 @@ private:
     Settings();
 };
 
-std::ostream &operator<<(std::ostream &os, Settings::GameRules::RankOrder order);
+std::ostream &operator<<(std::ostream &os, const Settings::GameRules::RankOrder order);
 
 std::istream &operator>>(std::istream &is, Settings::GameRules::RankOrder &order);

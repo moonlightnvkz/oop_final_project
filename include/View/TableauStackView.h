@@ -12,7 +12,7 @@ class TableauStackView : public CardContainerView {
     Q_OBJECT
 public:
     explicit TableauStackView(const CardContainer &container,
-                              QGraphicsItem *parent = nullptr, int v_shift = 15);
+                              QGraphicsItem *parent = nullptr, const int v_shift = 15);
 
     virtual ~TableauStackView() override;
 
@@ -21,10 +21,10 @@ public:
     virtual QRectF boundingRect() const override;
 
 public slots:
-    void adjust_v_shift(int new_v_shift);
+    void adjust_v_shift(const int new_v_shift);
 
 protected:
-    virtual QPixmap create_pixmap_for_drag(size_t amount) const override;
+    virtual QPixmap create_pixmap_for_drag(const size_t amount) const override;
 
     int v_shift;
 };

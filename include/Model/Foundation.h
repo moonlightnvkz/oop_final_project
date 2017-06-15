@@ -12,7 +12,7 @@ public:
 
     Foundation(Foundation &&foundation) : stacks(std::move(foundation.stacks)) { }
 
-    FoundationStack &get_stack(size_t i) { return stacks.at(i); }
+    FoundationStack &get_stack(const size_t i) { return stacks.at(i); }
 
     virtual ~Foundation() { }
 

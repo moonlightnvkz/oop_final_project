@@ -14,7 +14,7 @@ class TableauStack : public CardContainer{
 public:
     explicit TableauStack(bool alternate_suits = true, RankOrder order = RankOrder::Descending);
 
-    TableauStack(TableauStack &&stack, bool alternate_suits = true);
+    TableauStack(TableauStack &&stack);
 
     TableauStack(std::vector<std::unique_ptr<Card>> &&cards,
                  bool alternate_suits = true, RankOrder order = RankOrder::Descending);
@@ -25,9 +25,9 @@ public:
 
     bool push_back(TableauStack &&stack);
 
-    TableauStack get_tale(size_t amount);
+    TableauStack get_tale(const size_t amount);
 
-    const std::vector<const Card*> peek_tale(size_t amount);
+    const std::vector<const Card*> peek_tale(const size_t amount);
 
     virtual bool is_suitable(const Card *card) const override;
 
@@ -40,7 +40,7 @@ public:
 private:
     virtual void pop_back() override;
 
-    void pop_tale(size_t amount);
+    void pop_tale(const size_t amount);
 
     bool alternate_suits;
 

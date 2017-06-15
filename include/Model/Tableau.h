@@ -10,7 +10,7 @@
 
 class Tableau {
 public:
-    Tableau(unsigned stacks_amount);
+    Tableau(const unsigned stacks_amount);
 
     virtual ~Tableau() { }
 
@@ -18,7 +18,7 @@ public:
 
     Tableau(std::vector<TableauStack> &&stacks) : stacks(std::move(stacks)){ }
 
-    TableauStack &get_stack(size_t i) { return stacks.at(i); }
+    TableauStack &get_stack(const size_t i) { return stacks.at(i); }
 
     const std::vector<TableauStack> &peek_stacks() const { return stacks; }
 

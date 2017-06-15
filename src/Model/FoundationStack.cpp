@@ -10,7 +10,7 @@ FoundationStack::FoundationStack(FoundationStack &&stack)
 
 }
 
-FoundationStack::FoundationStack(RankOrder order)
+FoundationStack::FoundationStack(const RankOrder order)
         : order(order) {
 
 }
